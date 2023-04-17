@@ -1,0 +1,72 @@
+.masthead {
+  position: relative;
+  height: 70vh;
+  z-index: 1;
+}
+
+.masthead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/images/hero2.jpg");
+  background-size: cover;
+  background-position: right center;
+  opacity: 0.9;
+  z-index: -1;
+}
+.masthead h1,
+.masthead p {
+  color: white;
+}
+
+.masthead h1 {
+  font-size: 2rem; /* adjust the size as needed */
+  font-weight: bold; /* or use "lighter" or "normal" as desired */
+  letter-spacing: 0.1em; /* adjust the spacing as desired */
+  text-transform: uppercase; /* optional: transform the text to uppercase */
+  color: white; /* set the text color to white */
+  margin-bottom: 1rem;
+  /* add some space below the title */
+}
+
+.masthead p {
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.date {
+  color: white;
+  margin-bottom: 10rem;
+}
+
+.director {
+  font-weight: bold;
+}
+.btn-primary {
+  border-radius: 2rem;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.btn-secondary {
+  border-radius: 2rem;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+@media only screen and (max-width: 768px) {
+  .masthead {
+    height: 80vh;
+  }
+  .masthead::before {
+    background-position: center right;
+  }
+  .masthead h1 {
+    font-size: 1.5rem; /* adjust the size as needed */
+  }
+  .lead {
+    width: 100% !important;
+  }
+}
