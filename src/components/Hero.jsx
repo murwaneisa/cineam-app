@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container, Stack, Badge } from "react-bootstrap";
-import "../../hero.css";
+import "../style/hero.css";
 
 function HeroSection() {
   return (
@@ -20,8 +20,12 @@ function HeroSection() {
             </p>
 
             <Stack direction="horizontal" gap={3}>
-              <Button variant="primary">Get Ticket</Button>
-              <Button variant="secondary">Watch Trailer</Button>
+              <Button className="btn-hero" variant="primary">
+                Get Ticket
+              </Button>
+              <Button className="btn-hero" variant="secondary">
+                Watch Trailer
+              </Button>
             </Stack>
           </div>
         </div>
