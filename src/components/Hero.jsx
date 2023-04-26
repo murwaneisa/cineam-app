@@ -16,7 +16,7 @@ function HeroSection() {
               confront a challenger from his country's past.
             </p>
             <p>
-              Director: <span class="director">Ryan Coogler</span>
+              Director: <span className="director">Ryan Coogler</span>
             </p>
 
             <Stack direction="horizontal" gap={3}>
