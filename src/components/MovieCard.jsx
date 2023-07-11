@@ -3,9 +3,12 @@ import "../style/movieCard.css";
 import { Button, Container, Stack, Badge, Card } from "react-bootstrap";
 
 function MovieCard(props) {
-  const { original_title, poster_path } = props.movie;
+  const { original_title, poster_path, release_date } = props.movie;
   return (
-    <Card className="bg-dark p-3" style={{ color: "#ffffff", width: "14rem" }}>
+    <Card
+      className="bg-dark p-3 m-3"
+      style={{ color: "#ffffff", width: "14rem" }}
+    >
       <div style={{ height: "50%", overflow: "hidden" }}>
         <Card.Img
           variant="top"
@@ -16,7 +19,7 @@ function MovieCard(props) {
       <Card.Body className="p-0 mt-3 mb-2 h-50">
         <Card.Title style={{ fontSize: "1rem" }}>{original_title}</Card.Title>
         <Card.Text className="lead" style={{ fontSize: "1rem" }}>
-          Sun 8 SEPT-10:00
+          {release_date}
         </Card.Text>
         <Stack gap={3} direction="horizontal">
           <Button

@@ -24,16 +24,18 @@ class RenderMovies extends Component {
   render() {
     const { data } = this.state;
     return (
-      <Stack
-        gap={3}
-        direction="horizontal vertical-md"
-        className=" p-4 "
-        style={{ backgroundColor: "#000000" }}
-      >
-        {data.map((movie) => {
-          return <MovieCard movie={movie} />;
-        })}
-      </Stack>
+      <div style={{ backgroundColor: "#000000", border: "2px solid red" }}>
+        <div style={{ color: "white" }}>
+          {" "}
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer. This is a
+        </div>
+        <div class="d-flex align-items-center justify-content-center row row-cols-3 g-3">
+          {data.map((movie) => {
+            return <MovieCard movie={movie} />;
+          })}
+        </div>
+      </div>
     );
   }
 }
