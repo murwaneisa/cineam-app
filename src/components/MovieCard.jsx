@@ -1,23 +1,34 @@
 import React from "react";
-import "../style/movieCard.css";
+import "../style/moviesSection.css";
 import { Button, Container, Stack, Badge, Card } from "react-bootstrap";
 
 function MovieCard(props) {
   const { original_title, poster_path, release_date } = props.movie;
   return (
     <Card
-      className="bg-dark p-3 m-3"
+      className="bg-dark p-3 m-2  d-flex flex-column"
       style={{ color: "#ffffff", width: "14rem" }}
     >
-      <div style={{ height: "50%", overflow: "hidden" }}>
+      <div style={{ height: "70%", overflow: "hidden" }}>
         <Card.Img
           variant="top"
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
           style={{ height: "100%", objectFit: "cover" }}
         />
       </div>
-      <Card.Body className="p-0 mt-3 mb-2 h-50">
-        <Card.Title style={{ fontSize: "1rem" }}>{original_title}</Card.Title>
+      <Card.Body className="p-0 mt-3 mb-2 d-flex flex-column">
+        <div className="flex-grow-1">
+          <Card.Title
+            style={{
+              fontSize: "1rem",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {original_title}
+          </Card.Title>
+        </div>
         <Card.Text className="lead" style={{ fontSize: "1rem" }}>
           {release_date}
         </Card.Text>
@@ -31,8 +42,7 @@ function MovieCard(props) {
           </Button>
           <Button
             href="#"
-            className="btn-movie-card"
-            class="btn btn-outline-light "
+            className="btn btn-outline-light btn-movie-card bg-dark"
           >
             Details
           </Button>
@@ -43,53 +53,3 @@ function MovieCard(props) {
 }
 
 export default MovieCard;
-
-/* <div class="card bg-dark col-3 col-md-6" style={{ color: "#ffffff" }}>
-<div className="container w-100">
-  <div style={{ height: "50%" }}>
-    <img
-      class="card-img mt-2 rounded"
-      src="/images/hero3.jpg"
-      alt="Card image cap"
-      style={{ height: "100%" }}
-    />
-  </div>
-  <div class="card-body p-0 mt-3 mb-2">
-    <h5 class="card-title" style={{ fontSize: "0.8rem" }}>
-      Black Panther: Wakanda Forever 2022
-    </h5>
-    <p class="card-text-s">Some quick example text to</p>
-    <Button
-      href="#"
-      className="btn-movie-card"
-      class="btn btn-primary btn-sm"
-    >
-      Get Tickets
-    </Button>
-  </div>
-</div>
-</div> */
-
-/* 
-    <Card className="bg-dark p-3" style={{ color: "#ffffff", width: "12rem" }}>
-      <div style={{ height: "50%", overflow: "hidden" }}>
-        <Card.Img
-          variant="top"
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          style={{ height: "100%", objectFit: "cover" }}
-        />
-      </div>
-      <Card.Body className="p-0 mt-3 mb-2 h-50">
-        <Card.Title>{original_title}</Card.Title>
-        <Card.Text className="">Sun 8 SEPT-10:00</Card.Text>
-        <Stack gap={3} direction="horizontal">
-          <Button className="btn-movie-card" variant="primary">
-            <p className="">Get Tickets</p>
-          </Button>
-          <Button className="btn-movie-card" variant="outline-light">
-            <p>show Trailer</p>
-          </Button>
-        </Stack>
-      </Card.Body>
-    </Card>
-*/

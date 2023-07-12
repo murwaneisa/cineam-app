@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Stack } from "react-bootstrap";
 import MovieCard from "./MovieCard";
+import "../style/moviesSection.css";
 import { fetchData } from "./lib/api";
 
 class RenderMovies extends Component {
@@ -15,7 +16,7 @@ class RenderMovies extends Component {
     try {
       const result = await fetchData();
       this.setState({ data: result.data.results });
-      console.log("the data", result.data.results[0]);
+      /*  console.log("the data", result.data.results[0]); */
     } catch (error) {
       console.error(error);
     }
@@ -24,12 +25,11 @@ class RenderMovies extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div style={{ backgroundColor: "#000000", border: "2px solid red" }}>
-        <div style={{ color: "white" }}>
-          {" "}
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer. This is a
-        </div>
+      <div>
+        <h2 className="movie-section-title">
+          Now Showing Movies <img src="/images/show-icon.gif" alt="" />
+        </h2>
+
         <div class="d-flex align-items-center justify-content-center row row-cols-3 g-3">
           {data.map((movie) => {
             return <MovieCard movie={movie} />;

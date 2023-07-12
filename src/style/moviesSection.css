@@ -1,0 +1,29 @@
+.btn-movie-card {
+  border-radius: 1rem;
+  font-size: 0.8rem;
+}
+
+.movie-section-title {
+  font-family: "Heebo", sans-serif;
+  align-items: start;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+.movie-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+  .movie-section-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+}
