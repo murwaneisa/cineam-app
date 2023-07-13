@@ -5,13 +5,34 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Button } from "react-bootstrap";
 import Home from "./pages/Home";
+import ErrorPage from "./pages/ErrorPage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <>
+        <Navigation />
+        <Outlet />
+        <Footer />
+      </>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+    ],
+  },
+]);
 
 function App() {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

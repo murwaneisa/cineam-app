@@ -8,12 +8,10 @@ import Section from "../components/lib/Section";
 function Home() {
   return (
     <div>
-      <Navigation />
       <HeroSection />
       <Section>
         <RenderMovies />
       </Section>
-      <Footer />
     </div>
   );
 }
