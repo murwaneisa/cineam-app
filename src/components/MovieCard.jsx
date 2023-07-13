@@ -1,9 +1,10 @@
 import React from "react";
 import "../style/moviesSection.css";
 import { Button, Container, Stack, Badge, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function MovieCard(props) {
-  const { original_title, poster_path, release_date } = props.movie;
+  const { original_title, poster_path, release_date, id } = props.movie;
   return (
     <Card
       className="bg-dark p-3 m-2  d-flex flex-column"
@@ -40,12 +41,11 @@ function MovieCard(props) {
           >
             Tickets
           </Button>
-          <Button
-            href="#"
-            className="btn btn-outline-light btn-movie-card bg-dark"
-          >
-            Details
-          </Button>
+          <Link to={`/movies/${id}`}>
+            <Button className="btn btn-outline-light btn-movie-card bg-dark">
+              Details
+            </Button>
+          </Link>
         </Stack>
       </Card.Body>
     </Card>
