@@ -27,7 +27,8 @@ class RenderMovies extends Component {
     return (
       <div>
         <h2 className="movie-section-title">
-          Now Showing Movies <img src="/images/show-icon.gif" alt="" />
+          Now Showing Movies{" "}
+          <img src="/images/movie-icon.gif" style={{ width: "50px" }} alt="" />
         </h2>
 
         <div class="d-flex align-items-center justify-content-center row row-cols-3 g-3">
