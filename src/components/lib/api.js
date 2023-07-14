@@ -9,7 +9,17 @@ export async function fetchData() {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`
     );
-    console.log(response.data);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function fetchMovie(movie_id) {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`
+    );
     return response;
   } catch (error) {
     console.error(error);
