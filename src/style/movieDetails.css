@@ -1,0 +1,24 @@
+.container {
+  color: "white";
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.text_container {
+  color: white;
+  font-family: "Heebo", sans-serif;
+}
+
+.text_container h2 {
+  font-weight: bold;
+}
+.tags-container {
+  display: flex;
+  justify-items: center;
+}
+.text_container span {
+  font-weight: bold;
+}
+.tags-container span {
+  font-weight: bold;
+}
