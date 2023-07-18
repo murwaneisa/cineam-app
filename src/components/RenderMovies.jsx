@@ -3,6 +3,7 @@ import { Container, Stack } from "react-bootstrap";
 import MovieCard from "./MovieCard";
 import "../style/moviesSection.css";
 import { fetchData } from "./lib/api";
+import Loading from "../components/lib/loading";
 
 class RenderMovies extends Component {
   constructor(props) {
@@ -24,6 +25,9 @@ class RenderMovies extends Component {
 
   render() {
     const { data } = this.state;
+    if (data.length == 0) {
+      return <Loading />;
+    }
     return (
       <div>
         <h2 className="movie-section-title">

@@ -12,13 +12,21 @@
 .text_container h2 {
   font-weight: bold;
 }
-.tags-container {
-  display: flex;
-  justify-items: center;
-}
 .text_container span {
   font-weight: bold;
 }
-.tags-container span {
+.tags-container {
+  display: flex;
+  justify-items: center;
   font-weight: bold;
+}
+
+.tags-container span {
+  padding-left: 0.3rem;
+}
+
+.text_container p {
+  padding-top: 1rem;
+  font-size: 1.2rem;
+  font-family: "Heebo", sans-serif;
 }

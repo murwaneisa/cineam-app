@@ -1,23 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchMovie } from "../components/lib/api";
+import { fetchMovie, fetchMovieCastAndTrailer } from "../components/lib/api";
 import Section from "../components/lib/Section";
-import { Col, Container, Row, Stack } from "react-bootstrap";
+import { Badge, Col, Container, Row, Stack } from "react-bootstrap";
 import "../style/movieDetails.css";
-import { convertMinutesToHoursAndMinutes } from "../components/lib/helper";
+import {
+  convertMinutesToHoursAndMinutes,
+  formatDate,
+  languageCodeToName,
+} from "../components/lib/helper";
 import Loading from "../components/lib/loading";
-import { BiTime } from "react-icons/bi";
+import { IoMdTime } from "react-icons/io";
+import { LuCalendarDays } from "react-icons/lu";
 
 function MovieDetails() {
   // Access the dynamic route parameter
   const { id } = useParams();
   const [details, setDetails] = useState("");
+  const [actors, setActors] = useState("");
 
   useEffect(() => {
     try {
       async function fetchMovieDetails() {
         const movie = await fetchMovie(id);
+        const movie_cast_video = await fetchMovieCastAndTrailer(id);
         setDetails(movie.data);
+        setActors(movie_cast_video);
       }
       fetchMovieDetails();
     } catch (error) {
@@ -29,11 +37,19 @@ function MovieDetails() {
     return <Loading />;
   }
 
-  console.log("the id details  ", details);
-  const { title, poster_path, overview, runtime, release_date, genres } =
-    details;
+  const {
+    title,
+    poster_path,
+    overview,
+    runtime,
+    release_date,
+    genres,
+    backdrop_path,
+    original_language,
+  } = details;
   const genre = genres[0].name;
-  console.log("the genre details ", genres);
+  console.log("actors and vidoes", actors);
+
   return (
     <Section>
       <Container className="container">
@@ -50,14 +66,25 @@ function MovieDetails() {
             {/* Details Text */}
             <div className="text_container">
               <h2>{title}</h2>
-              <Stack direction="horizontal" gap={3}>
-                <div className="tags-container">
-                  <BiTime size={"20px"} />
-                  <spn>{convertMinutesToHoursAndMinutes(runtime)}</spn>
+              <div className="d-flex flex-wrap align-items-center">
+                <div className="tags-container d-inline-flex align-items-center mx-2">
+                  <IoMdTime size="20px" />
+                  <span>{convertMinutesToHoursAndMinutes(runtime)}</span>
                 </div>
-                <span>{genre}</span>
-                <span>{release_date}</span>
-              </Stack>
+                <div className="tags-container d-inline-flex align-items-center align-content-center mx-2">
+                  <Badge variant="outline-white" className="mr-1">
+                    New
+                  </Badge>
+                  <span>{genre}</span>
+                </div>
+                <div className="tags-container d-inline-flex align-items-center mx-2">
+                  <LuCalendarDays size="20px" />
+                  <span>{formatDate(release_date)}</span>
+                </div>
+                <div className="tags-container d-inline-flex align-items-center mx-2">
+                  <span>{languageCodeToName(original_language, "en")}</span>
+                </div>
+              </div>
             </div>
             <div className="text_container">
               <p>{overview}</p>

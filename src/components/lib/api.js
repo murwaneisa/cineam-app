@@ -25,3 +25,24 @@ export async function fetchMovie(movie_id) {
     console.error(error);
   }
 }
+
+export async function fetchMovieCastAndTrailer(movie_id) {
+  try {
+    const movieResponse = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${API_KEY}`
+    );
+    const videosResponse = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${API_KEY}`
+    );
+    const crew = movieResponse.data;
+    const videos = videosResponse.data.results;
+    console.log("Movie details", crew);
+    console.log("Movie trailers", videos);
+    for (let i = 0; i < 5; i++) {
+      console.log(crew.cast[i].name);
+    }
+    return { crew, videos };
+  } catch (error) {
+    console.error(error);
+  }
+}
