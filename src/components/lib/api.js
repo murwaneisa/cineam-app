@@ -34,14 +34,16 @@ export async function fetchMovieCastAndTrailer(movie_id) {
     const videosResponse = await axios.get(
       `https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${API_KEY}`
     );
-    const crew = movieResponse.data;
+    const crewData = movieResponse.data;
     const videos = videosResponse.data.results;
-    console.log("Movie details", crew);
-    console.log("Movie trailers", videos);
+    const crew_actors = crewData.cast;
+    console.log("Movie details", crew_actors);
+    /*  console.log("Movie trailers", videos); */
+    /*   const filteredCrew = [];
     for (let i = 0; i < 5; i++) {
-      console.log(crew.cast[i].name);
-    }
-    return { crew, videos };
+      filteredCrew.push(crew.cast[i].name);
+    } */
+    return { crew_actors, videos };
   } catch (error) {
     console.error(error);
   }

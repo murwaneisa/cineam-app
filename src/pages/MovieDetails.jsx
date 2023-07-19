@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovie, fetchMovieCastAndTrailer } from "../components/lib/api";
 import Section from "../components/lib/Section";
-import { Badge, Col, Container, Row, Stack } from "react-bootstrap";
+import { Badge, Col, Container, Image, Row, Stack } from "react-bootstrap";
 import "../style/movieDetails.css";
 import {
   convertMinutesToHoursAndMinutes,
@@ -17,7 +17,7 @@ function MovieDetails() {
   // Access the dynamic route parameter
   const { id } = useParams();
   const [details, setDetails] = useState("");
-  const [actors, setActors] = useState("");
+  const [crew, setCrew] = useState("");
 
   useEffect(() => {
     try {
@@ -25,7 +25,7 @@ function MovieDetails() {
         const movie = await fetchMovie(id);
         const movie_cast_video = await fetchMovieCastAndTrailer(id);
         setDetails(movie.data);
-        setActors(movie_cast_video);
+        setCrew(movie_cast_video);
       }
       fetchMovieDetails();
     } catch (error) {
@@ -48,7 +48,8 @@ function MovieDetails() {
     original_language,
   } = details;
   const genre = genres[0].name;
-  console.log("actors and vidoes", actors);
+
+  const main_actors = crew.crew_actors.slice(0, 4);
 
   return (
     <Section>
@@ -88,6 +89,19 @@ function MovieDetails() {
             </div>
             <div className="text_container">
               <p>{overview}</p>
+            </div>
+            <h4 className="actors_section_title">Actors : </h4>
+            <div className="d-flex justify-content-between flex-wrap">
+              {main_actors.map((actor) => (
+                <div key={actor.id} className="actor-item text-center mb-3">
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`}
+                    alt={actor.name}
+                    className="actor-image rounded-circle"
+                  />
+                  <p style={{ color: "white" }}>{actor.name}</p>
+                </div>
+              ))}
             </div>
           </Col>
         </Row>
