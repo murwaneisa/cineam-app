@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovie, fetchMovieCastAndTrailer } from "../components/lib/api";
 import Section from "../components/lib/Section";
-import { Badge, Col, Container, Image, Row, Stack } from "react-bootstrap";
+import {
+  Badge,
+  Button,
+  Col,
+  Container,
+  Image,
+  Row,
+  Stack,
+} from "react-bootstrap";
 import "../style/movieDetails.css";
 import {
   convertMinutesToHoursAndMinutes,
@@ -12,6 +20,7 @@ import {
 import Loading from "../components/lib/loading";
 import { IoMdTime } from "react-icons/io";
 import { LuCalendarDays } from "react-icons/lu";
+import { AiOutlinePlayCircle } from "react-icons/ai";
 
 function MovieDetails() {
   // Access the dynamic route parameter
@@ -53,15 +62,32 @@ function MovieDetails() {
 
   return (
     <Section>
-      <Container className="container">
-        <Row>
-          <Col md={4} xs={12} className="order-md-1 order-xs-2 p-2">
+      <Container className="container d-flex align-items-center justify-content-center">
+        <Row className="justify-content-center ">
+          <Col
+            md={4}
+            xs={12}
+            className="order-md-1 order-xs-2 p-2 justify-content-center align-item-center"
+          >
             {/* Image */}
+
             <img
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt="Movie"
               className="img-fluid"
+              style={{ width: "100%", height: "70%", alignContent: "center" }}
             />
+            <div className="mt-3 d-flex flex-row align-items-center">
+              <Button className="btn-details" variant="primary">
+                Get Ticket
+              </Button>
+              <Button className="btn-details" variant="outLine-primary">
+                <div className="d-flex justify-center">
+                  <AiOutlinePlayCircle size="2rem" color="#ffffff" />
+                  <span className="btn-trailer">Watch Trailer</span>
+                </div>
+              </Button>
+            </div>
           </Col>
           <Col md={6} xs={12} className="order-md-2 order-xs-1">
             {/* Details Text */}
