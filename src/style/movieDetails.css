@@ -54,4 +54,53 @@
 
 .btn-trailer {
   color: #ffffff;
+  padding-left: "1rem";
+}
+.custom-modal .modal-content {
+  background-color: #f0f0f0;
+}
+
+/* Style the custom modal background color */
+.custom-modal .modal-content {
+  background-color: #000000;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  /* Set the position to relative */
+}
+
+/* Style the custom close button */
+.custom-close-button {
+  position: absolute;
+  top: -1.375rem;
+  right: -1.375rem; /* Adjust the right position as needed */
+  background-color: #000;
+  color: #000;
+  border: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 0.125rem solid hsla(0, 0%, 100%, 0.24);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  color: #fff;
+}
+
+.icon-close-btn {
+  font-size: 1.2rem;
+}
+
+@media (max-width: 590px) {
+  .custom-close-button {
+    position: fixed;
+    display: block;
+    top: 6rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+  }
+  .icon-close-btn {
+    font-size: 2rem;
+  }
 }

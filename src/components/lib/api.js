@@ -36,14 +36,11 @@ export async function fetchMovieCastAndTrailer(movie_id) {
     );
     const crewData = movieResponse.data;
     const videos = videosResponse.data.results;
+    const trailer = videos.find((video) => video.type === "Trailer");
+    console.log("the trailer", trailer);
     const crew_actors = crewData.cast;
-    console.log("Movie details", crew_actors);
-    /*  console.log("Movie trailers", videos); */
-    /*   const filteredCrew = [];
-    for (let i = 0; i < 5; i++) {
-      filteredCrew.push(crew.cast[i].name);
-    } */
-    return { crew_actors, videos };
+
+    return { crew_actors, trailer };
   } catch (error) {
     console.error(error);
   }

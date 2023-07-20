@@ -21,12 +21,17 @@ import Loading from "../components/lib/loading";
 import { IoMdTime } from "react-icons/io";
 import { LuCalendarDays } from "react-icons/lu";
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import VideoPlayer from "../components/lib/vidoePlayer";
 
 function MovieDetails() {
   // Access the dynamic route parameter
   const { id } = useParams();
   const [details, setDetails] = useState("");
-  const [crew, setCrew] = useState("");
+  const [crewAndTrailer, setCrewAndTrailer] = useState("");
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     try {
@@ -34,7 +39,7 @@ function MovieDetails() {
         const movie = await fetchMovie(id);
         const movie_cast_video = await fetchMovieCastAndTrailer(id);
         setDetails(movie.data);
-        setCrew(movie_cast_video);
+        setCrewAndTrailer(movie_cast_video);
       }
       fetchMovieDetails();
     } catch (error) {
@@ -58,16 +63,18 @@ function MovieDetails() {
   } = details;
   const genre = genres[0].name;
 
-  const main_actors = crew.crew_actors.slice(0, 4);
-
+  const main_actors = crewAndTrailer.crew_actors.slice(0, 4);
+  const trailer_key = crewAndTrailer.trailer.key;
+  console.log("the videos ");
   return (
     <Section>
       <Container className="container d-flex align-items-center justify-content-center">
         <Row className="justify-content-center ">
           <Col
-            md={4}
+            lg={3}
+            md={5}
             xs={12}
-            className="order-md-1 order-xs-2 p-2 justify-content-center align-item-center"
+            className="order-md-1 order-xs-2 p-2  justify-content-center align-item-center"
           >
             {/* Image */}
 
@@ -75,21 +82,29 @@ function MovieDetails() {
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt="Movie"
               className="img-fluid"
-              style={{ width: "100%", height: "70%", alignContent: "center" }}
+              style={{
+                width: "100%",
+                maxWidth: "300px",
+                alignContent: "center",
+              }}
             />
-            <div className="mt-3 d-flex flex-row align-items-center">
+            <div className="mt-3 d-flex flex-row flex-md-col align-items-center">
               <Button className="btn-details" variant="primary">
                 Get Ticket
               </Button>
-              <Button className="btn-details" variant="outLine-primary">
-                <div className="d-flex justify-center">
+              <Button
+                className="btn-details"
+                variant="outLine-primary"
+                onClick={handleShow}
+              >
+                <div className="d-flex justify-content-center align-items-center">
                   <AiOutlinePlayCircle size="2rem" color="#ffffff" />
                   <span className="btn-trailer">Watch Trailer</span>
                 </div>
               </Button>
             </div>
           </Col>
-          <Col md={6} xs={12} className="order-md-2 order-xs-1">
+          <Col md={5} xs={12} className="order-md-2 order-xs-1">
             {/* Details Text */}
             <div className="text_container">
               <h2>{title}</h2>
@@ -117,7 +132,7 @@ function MovieDetails() {
               <p>{overview}</p>
             </div>
             <h4 className="actors_section_title">Actors : </h4>
-            <div className="d-flex justify-content-between flex-wrap">
+            <div className="d-flex justify-content-between flex-wrap mt-1 mt-md-5">
               {main_actors.map((actor) => (
                 <div key={actor.id} className="actor-item text-center mb-3">
                   <img
@@ -132,6 +147,11 @@ function MovieDetails() {
           </Col>
         </Row>
       </Container>
+      <VideoPlayer
+        handleClose={handleClose}
+        show={show}
+        trailer_key={trailer_key}
+      />
     </Section>
   );
 }
