@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { fetchMovie, fetchMovieCastAndTrailer } from "../components/lib/api";
+import {
+  fetchData,
+  fetchMovie,
+  fetchMovieCastAndTrailer,
+} from "../components/lib/api";
 import Section from "../components/lib/Section";
 import {
   Badge,
@@ -25,9 +29,10 @@ import VideoPlayer from "../components/lib/vidoePlayer";
 
 function MovieDetails() {
   // Access the dynamic route parameter
-  const { id } = useParams();
+  const { id, genreId } = useParams();
   const [details, setDetails] = useState("");
   const [crewAndTrailer, setCrewAndTrailer] = useState("");
+  const [movies, setMovies] = useState("");
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -38,8 +43,10 @@ function MovieDetails() {
       async function fetchMovieDetails() {
         const movie = await fetchMovie(id);
         const movie_cast_video = await fetchMovieCastAndTrailer(id);
+        const movies = await fetchData();
         setDetails(movie.data);
         setCrewAndTrailer(movie_cast_video);
+        setMovies(movies.data.results);
       }
       fetchMovieDetails();
     } catch (error) {
@@ -62,10 +69,13 @@ function MovieDetails() {
     original_language,
   } = details;
   const genre = genres[0].name;
-
+  console.log("the movies ", movies);
   const main_actors = crewAndTrailer.crew_actors.slice(0, 4);
   const trailer_key = crewAndTrailer.trailer.key;
-  console.log("the videos ");
+  const related_movies = movies.filter(
+    (movie) => movie.genre_ids[0] == genreId
+  );
+  console.log("the related movies ", related_movies);
   return (
     <Section>
       <Container className="container d-flex align-items-center justify-content-center">
@@ -147,11 +157,13 @@ function MovieDetails() {
           </Col>
         </Row>
       </Container>
+      {/* the trailer video */}
       <VideoPlayer
         handleClose={handleClose}
         show={show}
         trailer_key={trailer_key}
       />
+      {/* the related movies */}
     </Section>
   );
 }

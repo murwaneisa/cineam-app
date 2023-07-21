@@ -37,7 +37,7 @@ export async function fetchMovieCastAndTrailer(movie_id) {
     const crewData = movieResponse.data;
     const videos = videosResponse.data.results;
     const trailer = videos.find((video) => video.type === "Trailer");
-    console.log("the trailer", trailer);
+
     const crew_actors = crewData.cast;
 
     return { crew_actors, trailer };

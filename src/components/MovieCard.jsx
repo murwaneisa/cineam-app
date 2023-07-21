@@ -4,7 +4,9 @@ import { Button, Container, Stack, Badge, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 function MovieCard(props) {
-  const { original_title, poster_path, release_date, id } = props.movie;
+  const { original_title, poster_path, release_date, id, genre_ids } =
+    props.movie;
+  const genre = genre_ids[0];
   return (
     <Card
       className="bg-dark p-3 m-2  d-flex flex-column"
@@ -41,7 +43,7 @@ function MovieCard(props) {
           >
             Tickets
           </Button>
-          <Link to={`/movies/${id}`}>
+          <Link to={`/movies/${genre}/${id}`}>
             <Button className="btn btn-outline-light btn-movie-card bg-dark">
               Details
             </Button>
