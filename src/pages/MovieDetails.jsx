@@ -26,6 +26,8 @@ import { IoMdTime } from "react-icons/io";
 import { LuCalendarDays } from "react-icons/lu";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import VideoPlayer from "../components/lib/vidoePlayer";
+import MovieCard from "../components/MovieCard";
+import MovieCarousel from "../components/lib/MovieCarousel ";
 
 function MovieDetails() {
   // Access the dynamic route parameter
@@ -78,8 +80,11 @@ function MovieDetails() {
   console.log("the related movies ", related_movies);
   return (
     <Section>
-      <Container className="container d-flex align-items-center justify-content-center">
-        <Row className="justify-content-center ">
+      <Container
+        /* style={{ border: "solid 2px red " }} */
+        className="container d-flex "
+      >
+        <Row>
           <Col
             lg={3}
             md={5}
@@ -108,7 +113,7 @@ function MovieDetails() {
                 onClick={handleShow}
               >
                 <div className="d-flex justify-content-center align-items-center">
-                  <AiOutlinePlayCircle size="2rem" color="#ffffff" />
+                  <AiOutlinePlayCircle size="2rem" color="#ffffff" m-3 />
                   <span className="btn-trailer">Watch Trailer</span>
                 </div>
               </Button>
@@ -164,6 +169,10 @@ function MovieDetails() {
         trailer_key={trailer_key}
       />
       {/* the related movies */}
+      <Container>
+        <h3 className="related_movies_title">Related movies</h3>
+      </Container>
+      <MovieCarousel related_movies={related_movies} />
     </Section>
   );
 }

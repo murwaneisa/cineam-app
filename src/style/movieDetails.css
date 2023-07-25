@@ -54,7 +54,7 @@
 
 .btn-trailer {
   color: #ffffff;
-  padding-left: "1rem";
+  padding-left: 0.5rem;
 }
 .custom-modal .modal-content {
   background-color: #f0f0f0;
@@ -89,6 +89,13 @@
 
 .icon-close-btn {
   font-size: 1.2rem;
+}
+
+.related_movies_title {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  font-family: "Heebo", sans-serif;
 }
 
 @media (max-width: 590px) {

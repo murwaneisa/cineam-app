@@ -4,7 +4,7 @@ import { Navbar, Nav, NavItem, NavDropdown, Dropdown } from "react-bootstrap";
 function Navigation() {
   return (
     <Navbar bg="dark" variant="dark" expand="md" className="px-4">
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+      <Navbar.Brand href="/home">React-Bootstrap</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse
         id="basic-navbar-nav"
@@ -12,7 +12,7 @@ function Navigation() {
       >
         <Nav className="mr-auto">
           <NavItem>
-            <Nav.Link href="#link">Home</Nav.Link>
+            <Nav.Link href="/home">Home</Nav.Link>
           </NavItem>
           <NavItem>
             <Nav.Link href="#link">Contact</Nav.Link>
