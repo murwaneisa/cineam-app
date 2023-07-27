@@ -36,11 +36,7 @@ function MovieCard(props) {
           {release_date}
         </Card.Text>
         <Stack gap={3} direction="horizontal">
-          <Button
-            href="#"
-            className="btn-movie-card"
-            class="btn btn-primary btn-sm"
-          >
+          <Button href="#" className="btn-movie-card btn btn-primary btn-sm">
             Tickets
           </Button>
           <Link to={`/movies/${genre}/${id}`}>

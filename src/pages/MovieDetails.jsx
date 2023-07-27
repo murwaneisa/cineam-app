@@ -54,7 +54,7 @@ function MovieDetails() {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [id]);
   if (!details) {
     // Display a loading state or return null
     return <Loading />;
@@ -77,7 +77,7 @@ function MovieDetails() {
   const related_movies = movies.filter(
     (movie) => movie.genre_ids[0] == genreId
   );
-  console.log("the related movies ", related_movies);
+  console.log("the related movies is ", movies);
   return (
     <Section>
       <Container
@@ -113,7 +113,7 @@ function MovieDetails() {
                 onClick={handleShow}
               >
                 <div className="d-flex justify-content-center align-items-center">
-                  <AiOutlinePlayCircle size="2rem" color="#ffffff" m-3 />
+                  <AiOutlinePlayCircle size="2rem" color="#ffffff" />
                   <span className="btn-trailer">Watch Trailer</span>
                 </div>
               </Button>

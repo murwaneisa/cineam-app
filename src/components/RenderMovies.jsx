@@ -1,9 +1,10 @@
-import React, { Component } from "react";
+import React, { Component, createContext } from "react";
 import { Container, Stack } from "react-bootstrap";
 import MovieCard from "./MovieCard";
 import "../style/moviesSection.css";
 import { fetchData } from "./lib/api";
 import Loading from "../components/lib/loading";
+import { screening } from "./lib/helper";
 
 class RenderMovies extends Component {
   constructor(props) {
@@ -25,6 +26,9 @@ class RenderMovies extends Component {
 
   render() {
     const { data } = this.state;
+    const screenings = screening(data);
+    console.log("the screening array", screenings);
+
     if (data.length == 0) {
       return <Loading />;
     }
@@ -35,7 +39,7 @@ class RenderMovies extends Component {
           <img src="/images/movie-icon.gif" style={{ width: "50px" }} alt="" />
         </h2>
 
-        <div class="d-flex align-items-center justify-content-center row row-cols-3 g-3">
+        <div className="d-flex align-items-center justify-content-center row row-cols-3 g-3">
           {data.map((movie) => {
             return <MovieCard movie={movie} />;
           })}

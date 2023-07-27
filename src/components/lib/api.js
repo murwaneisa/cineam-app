@@ -20,6 +20,7 @@ export async function fetchMovie(movie_id) {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`
     );
+    console.log("response", response);
     return response;
   } catch (error) {
     console.error(error);
@@ -45,3 +46,16 @@ export async function fetchMovieCastAndTrailer(movie_id) {
     console.error(error);
   }
 }
+
+/* export async function getMovies() {
+  try {
+    const movieResponse = await axios.get(
+      `https://cinema-rest.nodehill.se/showJson/seats`
+    );
+    console.log("the response", movieResponse.json());
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+getMovies(); */
