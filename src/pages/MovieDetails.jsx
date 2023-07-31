@@ -25,6 +25,8 @@ import Loading from "../components/lib/loading";
 import { IoMdTime } from "react-icons/io";
 import { LuCalendarDays } from "react-icons/lu";
 import { AiOutlinePlayCircle } from "react-icons/ai";
+import { useSelector, useDispatch } from "react-redux";
+import { findMovieDate } from "../components/redux/slice";
 import VideoPlayer from "../components/lib/vidoePlayer";
 import MovieCard from "../components/MovieCard";
 import MovieCarousel from "../components/lib/MovieCarousel ";
@@ -39,6 +41,7 @@ function MovieDetails() {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const foundMovieDate = useSelector((state) => state.data);
 
   useEffect(() => {
     try {
@@ -77,7 +80,10 @@ function MovieDetails() {
   const related_movies = movies.filter(
     (movie) => movie.genre_ids[0] == genreId
   );
-  console.log("the related movies is ", movies);
+
+  const showTime = foundMovieDate.data.find((screen) => screen.movieId == id);
+
+  console.log("the related movies is ", showTime);
   return (
     <Section>
       <Container

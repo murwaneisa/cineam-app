@@ -7,6 +7,7 @@ function MovieCard(props) {
   const { original_title, poster_path, release_date, id, genre_ids } =
     props.movie;
   const genre = genre_ids[0];
+
   return (
     <Card
       className="bg-dark p-3 m-2  d-flex flex-column"
