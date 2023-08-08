@@ -49,10 +49,8 @@ export async function fetchMovieCastAndTrailer(movie_id) {
 
 /* export async function getMovies() {
   try {
-    const movieResponse = await axios.get(
-      `https://cinema-rest.nodehill.se/showJson/seats`
-    );
-    console.log("the response", movieResponse.json());
+    const movieResponse = await axios.get(`api/movies`);
+    console.log("the response", movieResponse);
   } catch (error) {
     console.error(error);
   }

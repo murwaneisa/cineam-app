@@ -26,7 +26,6 @@ import { IoMdTime } from "react-icons/io";
 import { LuCalendarDays } from "react-icons/lu";
 import { AiOutlinePlayCircle } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
-import { findMovieDate } from "../components/redux/slice";
 import VideoPlayer from "../components/lib/vidoePlayer";
 import MovieCard from "../components/MovieCard";
 import MovieCarousel from "../components/lib/MovieCarousel ";
@@ -96,6 +95,7 @@ function MovieDetails() {
             md={5}
             xs={12}
             className="order-md-1 order-xs-2 p-2  justify-content-center align-item-center"
+            /*   style={{ border: "solid 2px red" }} */
           >
             {/* Image */}
 
@@ -124,6 +124,8 @@ function MovieDetails() {
                 </div>
               </Button>
             </div>
+            {/* the show time  */}
+            {/*       <div style={{ color: "white" }}>{showTime.time}</div> */}
           </Col>
           <Col md={5} xs={12} className="order-md-2 order-xs-1">
             {/* Details Text */}
@@ -140,12 +142,14 @@ function MovieDetails() {
                   </Badge>
                   <span>{genre}</span>
                 </div>
-                <div className="tags-container d-inline-flex align-items-center mx-2">
-                  <LuCalendarDays size="20px" />
-                  <span>{formatDate(release_date)}</span>
-                </div>
+
                 <div className="tags-container d-inline-flex align-items-center mx-2">
                   <span>{languageCodeToName(original_language, "en")}</span>
+                </div>
+                <div className="tags-container d-inline-flex align-items-center mx-2">
+                  <LuCalendarDays size="20px" />
+                  {/* <span>{formatDate(release_date)}</span> */}
+                  <span>{showTime.time}</span>
                 </div>
               </div>
             </div>

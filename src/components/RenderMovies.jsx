@@ -3,33 +3,17 @@ import { Container, Stack } from "react-bootstrap";
 import MovieCard from "./MovieCard";
 import "../style/moviesSection.css";
 import { fetchData } from "./lib/api";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../components/lib/loading";
 import { screening } from "./lib/helper";
-import { setScreens } from "./redux/slice";
+import { setScreens, setMovies } from "./redux/slice";
 
 const RenderMovies = () => {
   const [data, setData] = useState([]);
-  const dispatch = useDispatch();
+  const dataMovies = useSelector((state) => state.data);
+  console.log("the data is the fucking", dataMovies.movies);
 
-  useEffect(() => {
-    async function fetchMovies() {
-      try {
-        const result = await fetchData();
-        setData(result.data.results);
-        /*  console.log("the data", result.data.results[0]); */
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchMovies();
-  }, []);
-
-  const screenings = screening(data);
-  dispatch(setScreens(screenings));
-  console.log("the screening array", screenings);
-
-  if (data.length == 0) {
+  if (!dataMovies.movies || dataMovies.movies.length === 0) {
     return <Loading />;
   }
   return (
@@ -40,7 +24,7 @@ const RenderMovies = () => {
       </h2>
 
       <div className="d-flex align-items-center justify-content-center row row-cols-3 g-3">
-        {data.map((movie) => {
+        {dataMovies.movies.map((movie) => {
           return <MovieCard movie={movie} />;
         })}
       </div>

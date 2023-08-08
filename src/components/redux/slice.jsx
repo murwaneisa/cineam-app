@@ -2,18 +2,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  data: [],
+  screens: [],
+  movies: [],
 };
 
-const dataSlice = createSlice({
+const screensSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
     setScreens(state, action) {
       state.data = action.payload;
     },
+    setMovies(state, action) {
+      state.movies = action.payload;
+    },
   },
 });
 
-export const { findMovieDate, setScreens, addData } = dataSlice.actions;
-export default dataSlice.reducer;
+export const { setScreens, setMovies } = screensSlice.actions;
+export default screensSlice.reducer;

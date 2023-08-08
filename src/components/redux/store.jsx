@@ -1,10 +1,10 @@
 // store.js
 import { configureStore } from "@reduxjs/toolkit";
-import dataReducer from "./slice"; // Import your dataSlice reducer
+import screensSlice from "./slice"; // Import your dataSlice reducer
 
 const Store = configureStore({
   reducer: {
-    data: dataReducer,
+    data: screensSlice,
   },
 });
 
