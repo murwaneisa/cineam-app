@@ -1,0 +1,56 @@
+.form-control-sm {
+  width: 3rem;
+}
+
+.increment-button {
+  background-color: #333;
+  border-radius: 50%;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+.selected-number {
+  display: inline-block;
+  font-size: 1.5rem;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 3.5rem;
+  width: 2.5rem;
+  color: #ffffff;
+  font-family: "Heebo", sans-serif;
+}
+
+.ticket-selection-title {
+  font-family: "Heebo", sans-serif;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.ticket-type {
+  color: #ffffff;
+  white-space: nowrap;
+  font-size: 1.25rem;
+  font-family: "Heebo", sans-serif;
+  font-weight: bold;
+}
+
+.ticket-price-line {
+  opacity: 0.7;
+  font-size: 0.875rem;
+  color: aliceblue;
+}
+.image-container {
+  display: inline-block;
+  width: 30%;
+  vertical-align: middle;
+}
+
+.movie-info-title {
+  font-family: "Heebo", sans-serif;
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.movie-info-subtitle {
+  font-family: "Heebo", sans-serif;
+  color: #ffffff;
+}

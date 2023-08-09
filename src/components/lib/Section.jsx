@@ -5,8 +5,8 @@ function Section({ children }) {
     <div
       style={{
         backgroundColor: "#000000",
-        paddingLeft: "2rem",
-        paddingRight: "2rem",
+        paddingLeft: "2%",
+        paddingRight: "2%",
       }}
     >
       {children}

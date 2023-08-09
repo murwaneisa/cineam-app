@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   fetchData,
   fetchMovie,
@@ -102,7 +102,7 @@ function MovieDetails() {
             <img
               src={`https://image.tmdb.org/t/p/w500${poster_path}`}
               alt="Movie"
-              className="img-fluid"
+              className="img-fluid "
               style={{
                 width: "100%",
                 maxWidth: "300px",
@@ -110,9 +110,11 @@ function MovieDetails() {
               }}
             />
             <div className="mt-3 d-flex flex-row flex-md-col align-items-center">
-              <Button className="btn-details" variant="primary">
-                Get Ticket
-              </Button>
+              <Link to={`/booking/${id}`}>
+                <Button className="btn-details" variant="primary">
+                  Get Ticket
+                </Button>
+              </Link>
               <Button
                 className="btn-details"
                 variant="outLine-primary"

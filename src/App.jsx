@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { fetchData } from "./components/lib/api";
 import { screening } from "./components/lib/helper";
 import { setMovies, setScreens } from "./components/redux/slice";
+import Booking from "./pages/Booking";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/movies/:genreId/:id",
         element: <MovieDetails />,
+      },
+      {
+        path: "/booking/:id",
+        element: <Booking />,
       },
     ],
   },
