@@ -20,13 +20,30 @@ function Booking() {
   const { id } = useParams();
   const movies = useSelector((state) => state.data);
   const movieInfo = movies.movies.find((movie) => movie.id == id);
+  const [ticketQuantities, setTicketQuantities] = useState({
+    adult: 1,
+    senior: 0,
+    child: 0,
+  });
+
+  const handleQuantityChange = (type, value) => {
+    setTicketQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [type]: Math.max(prevQuantities[type] + value, 0), // Ensure quantity doesn't go below 1
+    }));
+  };
+  console.log("the quantities number is ", ticketQuantities.adult);
 
   if (!movieInfo || Object.keys(movieInfo).length === 0) {
-    return <Loading />; //looding status until the the useSelector hook get the data
+    return <Loading />; //loading status until the the useSelector hook get the data
   }
   const auditorium = movies.data.find((audi) => audi.movieId == id);
-  console.log("first", auditorium);
-
+  /* console.log("first", auditorium); */
+  const ticketSum =
+    ticketQuantities.adult * 85 +
+    ticketQuantities.senior * 75 +
+    ticketQuantities.child * 65;
+  console.log("the ticket sum ", ticketSum);
   return (
     <Section>
       <Container>
@@ -61,11 +78,21 @@ function Booking() {
                 </Col>
 
                 <Col className="d-flex align-items-center">
-                  <Button variant="link" className="increment-button">
+                  <Button
+                    variant="link"
+                    className="increment-button"
+                    onClick={() => handleQuantityChange("adult", -1)}
+                  >
                     <AiOutlineMinus color="#ffffff" />
                   </Button>
-                  <span className="selected-number">2</span>
-                  <Button variant="link" className="increment-button">
+                  <span className="selected-number">
+                    {ticketQuantities.adult}
+                  </span>
+                  <Button
+                    variant="link"
+                    className="increment-button"
+                    onClick={() => handleQuantityChange("adult", 1)}
+                  >
                     <AiOutlinePlus color="#ffffff" />
                   </Button>
                 </Col>
@@ -74,15 +101,25 @@ function Booking() {
                 <Col className="ticket-type">
                   Senior
                   <p className="ticket-price-line">
-                    1 st Senior ( + 65 ) is 75 kr{" "}
+                    1 st senior ( + 65 ) is 75 kr{" "}
                   </p>{" "}
                 </Col>
                 <Col className="d-flex align-items-center">
-                  <Button variant="link" className="increment-button">
+                  <Button
+                    variant="link"
+                    className="increment-button"
+                    onClick={() => handleQuantityChange("senior", -1)}
+                  >
                     <AiOutlineMinus color="#ffffff" />
                   </Button>
-                  <span className="selected-number">10</span>
-                  <Button variant="link" className="increment-button">
+                  <span className="selected-number">
+                    {ticketQuantities.senior}
+                  </span>
+                  <Button
+                    variant="link"
+                    className="increment-button"
+                    onClick={() => handleQuantityChange("senior", 1)}
+                  >
                     <AiOutlinePlus color="#ffffff" />
                   </Button>
                 </Col>
@@ -95,15 +132,28 @@ function Booking() {
                   </p>{" "}
                 </Col>
                 <Col className="d-flex align-items-center">
-                  <Button variant="link" className="increment-button">
+                  <Button
+                    variant="link"
+                    className="increment-button"
+                    onClick={() => handleQuantityChange("child", -1)}
+                  >
                     <AiOutlineMinus color="#ffffff" />
                   </Button>
-                  <span className="selected-number">3</span>
-                  <Button variant="link" className="increment-button">
+                  <span className="selected-number">
+                    {ticketQuantities.child}
+                  </span>
+                  <Button
+                    variant="link"
+                    className="increment-button"
+                    onClick={() => handleQuantityChange("child", 1)}
+                  >
                     <AiOutlinePlus color="#ffffff" />
                   </Button>
                 </Col>
               </Stack>
+              <p className="ticket-selection-title">
+                Total sum : {ticketSum} kr
+              </p>
             </Stack>
           </Col>
           <Col>
