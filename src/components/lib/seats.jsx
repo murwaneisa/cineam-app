@@ -1,4 +1,4 @@
-[
+export const seats = [
   {
     id: 1,
     rowNumber: 1,

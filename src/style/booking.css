@@ -54,3 +54,35 @@
   font-family: "Heebo", sans-serif;
   color: #ffffff;
 }
+
+.screen-image-container {
+  width: 80%;
+}
+.seat-col {
+  border: solid 2px red;
+  overflow: hidden; /* Prevent horizontal scrollbar */
+}
+
+.seat-container {
+  width: 100%; /* Fixed width for the container */
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns */
+  grid-gap: 5px 2px;
+}
+
+.seat {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #f00;
+  color: #fff;
+}

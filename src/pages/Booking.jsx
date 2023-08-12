@@ -15,6 +15,7 @@ import "../style/booking.css";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loading from "../components/lib/loading";
+import { seats } from "../components/lib/seats";
 
 function Booking() {
   const { id } = useParams();
@@ -25,6 +26,32 @@ function Booking() {
     senior: 0,
     child: 0,
   });
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  // Your provided seats array
+  const totalAudience =
+    ticketQuantities.adult + ticketQuantities.senior + ticketQuantities.child;
+  const handleSeatClick = (clickedSeatId) => {
+    setSelectedSeats([clickedSeatId]);
+    const adjacentSeats = [];
+
+    // Find the clicked seat's index in the seats array
+    const clickedSeatIndex = seats.findIndex(
+      (seat) => seat.id === clickedSeatId
+    );
+
+    // Loop through the seats to find adjacent empty seats
+    for (let i = clickedSeatIndex; i < seats.length; i++) {
+      const seat = seats[i];
+      if (!selectedSeats.includes(seat.id)) {
+        adjacentSeats.push(seat.id);
+      }
+      if (adjacentSeats.length >= totalAudience) {
+        break;
+      }
+    }
+
+    setSelectedSeats([...selectedSeats, ...adjacentSeats]);
+  };
 
   const handleQuantityChange = (type, value) => {
     setTicketQuantities((prevQuantities) => ({
@@ -156,31 +183,29 @@ function Booking() {
               </p>
             </Stack>
           </Col>
-          <Col>
-            <div style={{ color: "red" }}>
-              In publishing and graphic design, Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/)
-              is a placeholder text commonly used to demonstrate the visual form
-              of a document or a typeface without relying on meaningful content.
-              Lorem ipsum may be used as a placeholder before final copy is
-              available. It is also used to temporarily replace text in a
-              process called greeking, which allows designers to consider the
-              form of a webpage or publication, without the meaning of the text
-              influencing the design. Lorem ipsum is typically a corrupted
-              version of De finibus bonorum et malorum, a 1st-century BC text by
-              the Roman statesman and philosopher Cicero, with words altered,
-              added, and removed to make it nonsensical and improper Latin. The
-              first two words themselves are a truncation of 'dolorem ipsum'
-              ('pain itself'). Versions of the Lorem ipsum text have been used
-              in typesetting at least since the 1960s, when it was popularized
-              by advertisements for Letraset transfer sheets.[1] Lorem ipsum was
-              introduced to the digital world in the mid-1980s, when Aldus
-              employed it in graphic and word-processing templates for its
-              desktop publishing program PageMaker. Other popular word
-              processors, including Pages and Microsoft Word, have since adopted
-              Lorem ipsum,[2] as have many LaTeX packages,[3][4][5] web content
-              managers such as Joomla! and WordPress, and CSS libraries such as
-              Semantic UI.[6]
-            </div>
+          <Col style={{ border: "solid 2px red" }}>
+            <Stack className="align-items-center  justify-content-center">
+              <Image
+                src="/images/screen.png"
+                alt="Screen Image"
+                className="screen-image-container"
+              />
+              <Container>
+                <Col className="seat-col">
+                  <div className="seat-container">
+                    {seats.map((seat) => (
+                      <div
+                        key={seat.id}
+                        className={`seat ${
+                          selectedSeats.includes(seat.id) ? "selected" : ""
+                        }`}
+                        onClick={() => handleSeatClick(seat.id)}
+                      ></div>
+                    ))}
+                  </div>
+                </Col>
+              </Container>
+            </Stack>
           </Col>
         </Row>
       </Container>
