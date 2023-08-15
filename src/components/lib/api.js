@@ -47,13 +47,12 @@ export async function fetchMovieCastAndTrailer(movie_id) {
   }
 }
 
-/* export async function getMovies() {
+export async function getSeats() {
+  console.log("executed ");
   try {
-    const movieResponse = await axios.get(`api/movies`);
-    console.log("the response", movieResponse);
+    const movieResponse = await axios.get(`api/seats`);
+    return movieResponse.data;
   } catch (error) {
     console.error(error);
   }
 }
-
-getMovies(); */

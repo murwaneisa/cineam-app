@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import { Button } from "react-bootstrap";
+
 import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -11,11 +9,13 @@ import { Outlet } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import MovieDetails from "./pages/MovieDetails";
-import { useDispatch } from "react-redux";
-import { fetchData } from "./components/lib/api";
+import { Provider, useDispatch } from "react-redux";
+import { fetchData, getSeats } from "./components/lib/api";
 import { screening } from "./components/lib/helper";
-import { setMovies, setScreens } from "./components/redux/slice";
+import { setMovies, setScreens, setSeats } from "./components/redux/slice";
 import Booking from "./pages/Booking";
+import { PersistGate } from "redux-persist/integration/react";
+import store, { persistor } from "./components/redux/store";
 
 const router = createBrowserRouter([
   {
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
         element: <MovieDetails />,
       },
       {
-        path: "/booking/:id",
+        path: "/booking/:auditoriumId/:id",
         element: <Booking />,
       },
     ],
@@ -57,17 +57,26 @@ function App() {
       try {
         const result = await fetchData();
         const movies = result.data.results;
-        const screenings = screening(movies);
+        const screenings = await screening(movies);
+        const seats = await getSeats();
+        console.log("the seats: " + seats);
+        dispatch(setSeats(seats));
         dispatch(setMovies(result.data.results));
         dispatch(setScreens(screenings));
-        console.log("the screening array", screenings);
       } catch (error) {
         console.error(error);
       }
     }
     fetchMovies();
-  }, []);
-  return <RouterProvider router={router}></RouterProvider>;
+  }, [dispatch]);
+
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <RouterProvider router={router}></RouterProvider>
+      </PersistGate>
+    </Provider>
+  );
 }
 
 export default App;

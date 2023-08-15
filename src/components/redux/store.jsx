@@ -1,11 +1,23 @@
-// store.js
 import { configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import screensSlice from "./slice"; // Import your dataSlice reducer
 
-const Store = configureStore({
+// Configure the Redux Persist
+const persistConfig = {
+  key: "root", // Key used to persist the data in storage
+  storage,
+  whitelist: ["data"], // Reducers you want to persist
+};
+
+const persistedReducer = persistReducer(persistConfig, screensSlice);
+
+const store = configureStore({
   reducer: {
-    data: screensSlice,
+    data: persistedReducer, // Use the persisted reducer
   },
 });
 
-export default Store;
+export const persistor = persistStore(store); // Initialize the persistor
+
+export default store;

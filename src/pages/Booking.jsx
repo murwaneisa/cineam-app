@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Section from "../components/lib/Section";
 import {
   Row,
@@ -18,9 +18,14 @@ import Loading from "../components/lib/loading";
 import { seats } from "../components/lib/seats";
 
 function Booking() {
-  const { id } = useParams();
-  const movies = useSelector((state) => state.data);
-  const movieInfo = movies.movies.find((movie) => movie.id == id);
+  const { id, auditoriumId } = useParams();
+  const data = useSelector((state) => state.data);
+
+  const movieInfo = data.movies.find((movie) => movie.id == id);
+  const auditorium = data.screens.find((audi) => audi.movieId == id);
+  /*   const seats = data.seats; */
+  console.log("the seats auditorium", auditoriumId);
+
   const [ticketQuantities, setTicketQuantities] = useState({
     adult: 1,
     senior: 0,
@@ -30,27 +35,32 @@ function Booking() {
   // Your provided seats array
   const totalAudience =
     ticketQuantities.adult + ticketQuantities.senior + ticketQuantities.child;
+
   const handleSeatClick = (clickedSeatId) => {
-    setSelectedSeats([clickedSeatId]);
-    const adjacentSeats = [];
+    // Check if the clicked seat is already selected
+    if (selectedSeats.includes(clickedSeatId)) {
+      setSelectedSeats(selectedSeats.filter((id) => id !== clickedSeatId));
+    } else {
+      const adjacentSeats = [];
 
-    // Find the clicked seat's index in the seats array
-    const clickedSeatIndex = seats.findIndex(
-      (seat) => seat.id === clickedSeatId
-    );
+      // Find the clicked seat's index in the seats array
+      const clickedSeatIndex = seats.findIndex(
+        (seat) => seat.id === clickedSeatId
+      );
 
-    // Loop through the seats to find adjacent empty seats
-    for (let i = clickedSeatIndex; i < seats.length; i++) {
-      const seat = seats[i];
-      if (!selectedSeats.includes(seat.id)) {
-        adjacentSeats.push(seat.id);
+      // Loop through the seats to find adjacent empty seats
+      for (let i = clickedSeatIndex; i < seats.length; i++) {
+        const seat = seats[i];
+        if (!selectedSeats.includes(seat.id)) {
+          adjacentSeats.push(seat.id);
+        }
+        if (adjacentSeats.length >= totalAudience) {
+          break;
+        }
       }
-      if (adjacentSeats.length >= totalAudience) {
-        break;
-      }
+
+      setSelectedSeats([...selectedSeats, ...adjacentSeats]);
     }
-
-    setSelectedSeats([...selectedSeats, ...adjacentSeats]);
   };
 
   const handleQuantityChange = (type, value) => {
@@ -61,16 +71,23 @@ function Booking() {
   };
   console.log("the quantities number is ", ticketQuantities.adult);
 
-  if (!movieInfo || Object.keys(movieInfo).length === 0) {
+  if (
+    !movieInfo ||
+    Object.keys(movieInfo).length === 0 ||
+    !seats ||
+    Object.keys(seats).length === 0
+  ) {
     return <Loading />; //loading status until the the useSelector hook get the data
   }
-  const auditorium = movies.data.find((audi) => audi.movieId == id);
+
   /* console.log("first", auditorium); */
   const ticketSum =
     ticketQuantities.adult * 85 +
     ticketQuantities.senior * 75 +
     ticketQuantities.child * 65;
-  console.log("the ticket sum ", ticketSum);
+  const fintAuditoriumSeats = seats.filter(
+    (seat) => seat.auditoriumId === ticketSum
+  );
   return (
     <Section>
       <Container>

@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   screens: [],
   movies: [],
+  seats: [],
 };
 
 const screensSlice = createSlice({
@@ -11,13 +12,16 @@ const screensSlice = createSlice({
   initialState,
   reducers: {
     setScreens(state, action) {
-      state.data = action.payload;
+      state.screens = action.payload;
     },
     setMovies(state, action) {
       state.movies = action.payload;
     },
+    setSeats(state, action) {
+      state.seats = action.payload;
+    },
   },
 });
 
-export const { setScreens, setMovies } = screensSlice.actions;
+export const { setScreens, setMovies, setSeats } = screensSlice.actions;
 export default screensSlice.reducer;

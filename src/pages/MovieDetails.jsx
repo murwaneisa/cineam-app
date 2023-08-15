@@ -80,9 +80,12 @@ function MovieDetails() {
     (movie) => movie.genre_ids[0] == genreId
   );
 
-  const showTime = foundMovieDate.data.find((screen) => screen.movieId == id);
+  const showTime = foundMovieDate.screens.find(
+    (screen) => screen.movieId == id
+  );
 
-  console.log("the related movies is ", showTime);
+  const auditoriumId = showTime.auditoriumId;
+  console.log("the related movies is ", showTime.auditoriumId);
   return (
     <Section>
       <Container
@@ -110,7 +113,7 @@ function MovieDetails() {
               }}
             />
             <div className="mt-3 d-flex flex-row flex-md-col align-items-center">
-              <Link to={`/booking/${id}`}>
+              <Link to={`/booking/${auditoriumId}/${id}`}>
                 <Button className="btn-details" variant="primary">
                   Get Ticket
                 </Button>
