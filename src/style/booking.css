@@ -65,9 +65,9 @@
 
 .seat-container {
   width: 100%; /* Fixed width for the container */
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns */
-  grid-gap: 5px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Adjust the number of columns */
 }
 
 .seat {
@@ -80,9 +80,15 @@
   justify-content: center;
   background-color: #ccc;
   cursor: pointer;
+  margin: 10px;
 }
 
 .selected {
   background-color: #f00;
   color: #fff;
+}
+@media (max-width: 500px) {
+  .seat {
+    margin: 2px;
+  }
 }

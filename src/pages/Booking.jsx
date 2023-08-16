@@ -23,8 +23,11 @@ function Booking() {
 
   const movieInfo = data.movies.find((movie) => movie.id == id);
   const auditorium = data.screens.find((audi) => audi.movieId == id);
+  const auditoriumSeats = seats.filter(
+    (seat) => seat.auditoriumId == auditoriumId
+  );
   /*   const seats = data.seats; */
-  console.log("the seats auditorium", auditoriumId);
+  console.log("the seats auditorium seats", auditoriumSeats);
 
   const [ticketQuantities, setTicketQuantities] = useState({
     adult: 1,
@@ -41,27 +44,29 @@ function Booking() {
     if (selectedSeats.includes(clickedSeatId)) {
       setSelectedSeats(selectedSeats.filter((id) => id !== clickedSeatId));
     } else {
-      const adjacentSeats = [];
+      const clickedSeat = seats.find((seat) => seat.id === clickedSeatId);
+      const rowNumber = clickedSeat.rowNumber;
 
-      // Find the clicked seat's index in the seats array
-      const clickedSeatIndex = seats.findIndex(
-        (seat) => seat.id === clickedSeatId
-      );
-
-      // Loop through the seats to find adjacent empty seats
-      for (let i = clickedSeatIndex; i < seats.length; i++) {
-        const seat = seats[i];
-        if (!selectedSeats.includes(seat.id)) {
-          adjacentSeats.push(seat.id);
-        }
-        if (adjacentSeats.length >= totalAudience) {
-          break;
-        }
-      }
+      const adjacentSeats = seats
+        .filter(
+          (seat) =>
+            seat.rowNumber === rowNumber &&
+            Math.abs(seat.seatNumber - clickedSeat.seatNumber) <=
+              totalAudience - 1
+        )
+        .map((seat) => seat.id);
 
       setSelectedSeats([...selectedSeats, ...adjacentSeats]);
     }
   };
+
+  const seatsByRows = {};
+  auditoriumSeats.forEach((seat) => {
+    if (!seatsByRows[seat.rowNumber]) {
+      seatsByRows[seat.rowNumber] = [];
+    }
+    seatsByRows[seat.rowNumber].push(seat);
+  });
 
   const handleQuantityChange = (type, value) => {
     setTicketQuantities((prevQuantities) => ({
@@ -69,7 +74,6 @@ function Booking() {
       [type]: Math.max(prevQuantities[type] + value, 0), // Ensure quantity doesn't go below 1
     }));
   };
-  console.log("the quantities number is ", ticketQuantities.adult);
 
   if (
     !movieInfo ||
@@ -85,9 +89,7 @@ function Booking() {
     ticketQuantities.adult * 85 +
     ticketQuantities.senior * 75 +
     ticketQuantities.child * 65;
-  const fintAuditoriumSeats = seats.filter(
-    (seat) => seat.auditoriumId === ticketSum
-  );
+
   return (
     <Section>
       <Container>
@@ -208,19 +210,29 @@ function Booking() {
                 className="screen-image-container"
               />
               <Container>
-                <Col className="seat-col">
-                  <div className="seat-container">
-                    {seats.map((seat) => (
+                {Object.keys(seatsByRows).map((rowNumber) => {
+                  const numColumns = seatsByRows[rowNumber].length;
+                  return (
+                    <Col key={rowNumber} className="seat-col">
                       <div
-                        key={seat.id}
-                        className={`seat ${
-                          selectedSeats.includes(seat.id) ? "selected" : ""
-                        }`}
-                        onClick={() => handleSeatClick(seat.id)}
-                      ></div>
-                    ))}
-                  </div>
-                </Col>
+                        className="seat-container"
+                        style={{
+                          gridTemplateColumns: `repeat(${numColumns}, 1fr)`,
+                        }}
+                      >
+                        {seatsByRows[rowNumber].map((seat) => (
+                          <div
+                            key={seat.id}
+                            className={`seat ${
+                              selectedSeats.includes(seat.id) ? "selected" : ""
+                            }`}
+                            onClick={() => handleSeatClick(seat.id)}
+                          ></div>
+                        ))}
+                      </div>
+                    </Col>
+                  );
+                })}
               </Container>
             </Stack>
           </Col>
