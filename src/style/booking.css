@@ -59,7 +59,6 @@
   width: 80%;
 }
 .seat-col {
-  border: solid 2px red;
   overflow: hidden; /* Prevent horizontal scrollbar */
 }
 
@@ -72,7 +71,7 @@
 
 .seat {
   width: 20px;
-  height: 20px;
+  height: 22px;
   border: 1px solid #ccc;
   border-radius: 3px;
   display: flex;
@@ -85,8 +84,19 @@
 
 .selected {
   background-color: #f00;
-  color: #fff;
+  border-color: #f00;
 }
+.available {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+.unavailable {
+  background-color: #41424c;
+  border-color: #41424c;
+  cursor: not-allowed;
+}
+
 @media (max-width: 500px) {
   .seat {
     margin: 2px;

@@ -14,8 +14,6 @@ import { fetchData, getSeats } from "./components/lib/api";
 import { screening } from "./components/lib/helper";
 import { setMovies, setScreens, setSeats } from "./components/redux/slice";
 import Booking from "./pages/Booking";
-import { PersistGate } from "redux-persist/integration/react";
-import store, { persistor } from "./components/redux/store";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +57,7 @@ function App() {
         const movies = result.data.results;
         const screenings = await screening(movies);
         const seats = await getSeats();
-        console.log("the seats: " + seats);
+        console.log("the seats: ", seats);
         dispatch(setSeats(seats));
         dispatch(setMovies(result.data.results));
         dispatch(setScreens(screenings));
@@ -68,15 +66,9 @@ function App() {
       }
     }
     fetchMovies();
-  }, [dispatch]);
+  }, []);
 
-  return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <RouterProvider router={router}></RouterProvider>
-      </PersistGate>
-    </Provider>
-  );
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
 export default App;

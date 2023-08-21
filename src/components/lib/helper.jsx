@@ -50,6 +50,7 @@ function getRandomDateAndTime() {
 }
 
 export const screening = (movies) => {
+  console.log("screeeeeeeeeeeeeeeeeeeeeeeenigs");
   const screenings = [];
   console.log("Loading movies", movies);
   for (const movie of movies) {

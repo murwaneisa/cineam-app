@@ -11,13 +11,13 @@ const screensSlice = createSlice({
   name: "data",
   initialState,
   reducers: {
-    setScreens(state, action) {
+    setScreens: (state, action) => {
       state.screens = action.payload;
     },
-    setMovies(state, action) {
+    setMovies: (state, action) => {
       state.movies = action.payload;
     },
-    setSeats(state, action) {
+    setSeats: (state, action) => {
       state.seats = action.payload;
     },
   },

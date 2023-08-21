@@ -38,16 +38,24 @@ function Booking() {
   // Your provided seats array
   const totalAudience =
     ticketQuantities.adult + ticketQuantities.senior + ticketQuantities.child;
-
+  console.log("the total audience", totalAudience);
   const handleSeatClick = (clickedSeatId) => {
+    const clickedSeat = auditoriumSeats.find(
+      (seat) => seat.id === clickedSeatId
+    );
+
+    if (!clickedSeat.isAvailable) {
+      // If the seat is not available, do nothing
+      return;
+    }
+
     // Check if the clicked seat is already selected
     if (selectedSeats.includes(clickedSeatId)) {
       setSelectedSeats(selectedSeats.filter((id) => id !== clickedSeatId));
     } else {
-      const clickedSeat = seats.find((seat) => seat.id === clickedSeatId);
       const rowNumber = clickedSeat.rowNumber;
 
-      const adjacentSeats = seats
+      const adjacentSeats = auditoriumSeats
         .filter(
           (seat) =>
             seat.rowNumber === rowNumber &&
@@ -89,7 +97,7 @@ function Booking() {
     ticketQuantities.adult * 85 +
     ticketQuantities.senior * 75 +
     ticketQuantities.child * 65;
-
+  console.log("the selected seats ", selectedSeats);
   return (
     <Section>
       <Container>
@@ -202,7 +210,7 @@ function Booking() {
               </p>
             </Stack>
           </Col>
-          <Col style={{ border: "solid 2px red" }}>
+          <Col>
             <Stack className="align-items-center  justify-content-center">
               <Image
                 src="/images/screen.png"
@@ -224,7 +232,11 @@ function Booking() {
                           <div
                             key={seat.id}
                             className={`seat ${
-                              selectedSeats.includes(seat.id) ? "selected" : ""
+                              selectedSeats.includes(seat.id)
+                                ? "selected"
+                                : seat.isAvailable
+                                ? "available"
+                                : "unavailable"
                             }`}
                             onClick={() => handleSeatClick(seat.id)}
                           ></div>
@@ -233,6 +245,23 @@ function Booking() {
                     </Col>
                   );
                 })}
+                <Stack
+                  direction="horizontal"
+                  className="mt-4 align-items-center justify-content-center"
+                >
+                  <div className="d-flex align-items-center  ">
+                    <div className="seat available"></div>
+                    <span style={{ color: "#ffffff" }}>Available</span>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <div className="seat selected"></div>
+                    <span style={{ color: "#ffffff" }}>Selected</span>
+                  </div>
+                  <div className="d-flex align-items-center">
+                    <div className="seat unavailable"></div>
+                    <span style={{ color: "#ffffff" }}>Unavailable</span>
+                  </div>
+                </Stack>
               </Container>
             </Stack>
           </Col>
