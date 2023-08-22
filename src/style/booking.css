@@ -96,9 +96,35 @@
   border-color: #41424c;
   cursor: not-allowed;
 }
+.btn-booking {
+  border-radius: 2rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  width: 10rem;
+}
 
+.ticket-sec-title {
+  font-size: 100%;
+  color: #41424c;
+  margin: 5px;
+}
+
+.ticket-sec-info {
+  font-size: 100%;
+  font-weight: bold;
+  color: #000000;
+  margin: 5px;
+}
 @media (max-width: 500px) {
   .seat {
     margin: 2px;
+  }
+}
+@media (max-width: 530px) {
+  .col {
+    padding: 0 5px;
+  }
+  .ticket-sec-info {
+    font-size: 49%;
   }
 }

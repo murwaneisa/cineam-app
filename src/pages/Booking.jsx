@@ -16,11 +16,14 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loading from "../components/lib/loading";
 import { seats } from "../components/lib/seats";
+import Ticket from "../components/lib/Ticket";
 
 function Booking() {
   const { id, auditoriumId } = useParams();
   const data = useSelector((state) => state.data);
-
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   const movieInfo = data.movies.find((movie) => movie.id == id);
   const auditorium = data.screens.find((audi) => audi.movieId == id);
   const auditoriumSeats = seats.filter(
@@ -127,8 +130,7 @@ function Booking() {
               </h4>
               <Stack direction="horizontal">
                 <Col className="ticket-type">
-                  Adult{" "}
-                  <p className="ticket-price-line">1 st adult is 85 kr </p>
+                  Adult <p className="ticket-price-line">1 adult is 85 kr </p>
                 </Col>
 
                 <Col className="d-flex align-items-center">
@@ -155,7 +157,7 @@ function Booking() {
                 <Col className="ticket-type">
                   Senior
                   <p className="ticket-price-line">
-                    1 st senior ( + 65 ) is 75 kr{" "}
+                    1 senior ( + 65 ) is 75 kr{" "}
                   </p>{" "}
                 </Col>
                 <Col className="d-flex align-items-center">
@@ -182,7 +184,7 @@ function Booking() {
                 <Col className="ticket-type">
                   children
                   <p className="ticket-price-line">
-                    1 st child (- 12 ) is 65 kr{" "}
+                    1 child (- 12 ) is 65 kr{" "}
                   </p>{" "}
                 </Col>
                 <Col className="d-flex align-items-center">
@@ -245,24 +247,34 @@ function Booking() {
                     </Col>
                   );
                 })}
-                <Stack
-                  direction="horizontal"
-                  className="mt-4 align-items-center justify-content-center"
-                >
-                  <div className="d-flex align-items-center  ">
-                    <div className="seat available"></div>
-                    <span style={{ color: "#ffffff" }}>Available</span>
-                  </div>
-                  <div className="d-flex align-items-center">
-                    <div className="seat selected"></div>
-                    <span style={{ color: "#ffffff" }}>Selected</span>
-                  </div>
-                  <div className="d-flex align-items-center">
-                    <div className="seat unavailable"></div>
-                    <span style={{ color: "#ffffff" }}>Unavailable</span>
-                  </div>
+                <Stack className="align-items-center">
+                  <Stack
+                    direction="horizontal"
+                    className="mt-4 mb-4 align-items-center justify-content-center"
+                  >
+                    <div className="d-flex align-items-center  ">
+                      <div className="seat available"></div>
+                      <span style={{ color: "#ffffff" }}>Available</span>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <div className="seat selected"></div>
+                      <span style={{ color: "#ffffff" }}>Selected</span>
+                    </div>
+                    <div className="d-flex align-items-center">
+                      <div className="seat unavailable"></div>
+                      <span style={{ color: "#ffffff" }}>Unavailable</span>
+                    </div>
+                  </Stack>
+                  <Button
+                    onClick={handleShow}
+                    size="md"
+                    className="btn-booking"
+                  >
+                    Bok tickets
+                  </Button>
                 </Stack>
               </Container>
+              <Ticket show={show} handleClose={handleClose} />
             </Stack>
           </Col>
         </Row>
