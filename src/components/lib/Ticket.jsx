@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Col, Modal, Row, Stack } from "react-bootstrap";
+import { Button, Col, Image, Modal, Row, Stack } from "react-bootstrap";
 import { MdOutlineClose } from "react-icons/md";
 
 function Ticket({ show, handleClose }) {
@@ -18,9 +18,9 @@ function Ticket({ show, handleClose }) {
         </Modal.Header>
 
         <Modal.Body className="d-flex flex-column align-items-center justify-content-center">
-          <Stack>
-            <p>Date and time:</p>
-            <h4>Sat Aug 26 2023 19:00</h4>
+          <Stack className="px-2 mb-4">
+            <p className="ticket-sec-title">Date and time</p>
+            <h5 className="ticket-sec-info">Sat Aug 26 2023 19:00</h5>
           </Stack>
           <Row style={{ width: "100%" }}>
             <Col style={{ width: "33%" }}>
@@ -56,8 +56,13 @@ function Ticket({ show, handleClose }) {
           </Row>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary">Close Modal</Button>
-          <Button variant="primary">Save changes</Button>
+          <div>
+            <Image src={"/images/barcode.png"} style={{ width: "100%" }} />
+
+            <Button style={{ width: "100%" }} variant="primary">
+              Download your ticket
+            </Button>
+          </div>
         </Modal.Footer>
       </Modal>
     </>

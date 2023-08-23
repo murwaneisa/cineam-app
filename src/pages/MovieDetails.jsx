@@ -75,7 +75,13 @@ function MovieDetails() {
   const genre = genres[0].name;
   console.log("the movies ", movies);
   const main_actors = crewAndTrailer.crew_actors.slice(0, 4);
-  const trailer_key = crewAndTrailer.trailer.key;
+  console.log("the trailer ", crewAndTrailer);
+
+  let trailer_key;
+  if (crewAndTrailer.trailer) {
+    // check if there is trailer key
+    trailer_key = crewAndTrailer.trailer.key;
+  }
   const related_movies = movies.filter(
     (movie) => movie.genre_ids[0] == genreId
   );
