@@ -1,0 +1,8 @@
+.transparent-navbar {
+  background-color: rgba(0, 0, 0, 1);
+}
+
+.nav-text {
+  font-family: "Heebo", sans-serif;
+  font-weight: bold;
+}

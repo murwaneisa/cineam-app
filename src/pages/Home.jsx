@@ -26,7 +26,7 @@ function Home() {
             <div className="overlay">
               <Container>
                 <h3>Buy One Large Popcorn + One Large Pepsi </h3>
-                <Button className="btn btn-outline-light btn-movie-card bg-dark">
+                <Button className="btn btn-outline-light btn-desc bg-dark">
                   Up To 20% OFF
                 </Button>
               </Container>

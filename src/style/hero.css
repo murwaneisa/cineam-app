@@ -11,10 +11,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 8)),
-    url("/images/hero2.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 8));
   background-size: cover;
   background-position: right center;
+  background-repeat: no-repeat;
   opacity: 0.9;
   z-index: -1;
 }
@@ -24,7 +24,7 @@
 }
 
 .masthead h1 {
-  font-size: 2rem; /* adjust the size as needed */
+  font-size: 1.5rem; /* adjust the size as needed */
   font-weight: bold; /* or use "lighter" or "normal" as desired */
   letter-spacing: 0.1em; /* adjust the spacing as desired */
   text-transform: uppercase; /* optional: transform the text to uppercase */
@@ -38,6 +38,7 @@
   font-family: "Heebo", sans-serif;
   font-size: 1rem;
   margin-top: 1rem;
+  font-weight: bold;
 }
 
 .date {
@@ -49,6 +50,17 @@
   font-weight: bold;
 }
 .btn-hero {
+  border-radius: 2rem;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  background-color: #4b006e;
+  border-color: #4b006e;
+}
+.btn-hero:hover {
+  background-color: #9966cc;
+  border-color: #9966cc;
+}
+.btn-secondary {
   border-radius: 2rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;

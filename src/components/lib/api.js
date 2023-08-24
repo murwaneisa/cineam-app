@@ -7,7 +7,7 @@ console.log("the key is ", API_KEY);
 export async function fetchData() {
   try {
     const response = await axios.get(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}`
+      `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}`
     );
     return response;
   } catch (error) {
@@ -20,7 +20,6 @@ export async function fetchMovie(movie_id) {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${API_KEY}`
     );
-    console.log("response", response);
     return response;
   } catch (error) {
     console.error(error);

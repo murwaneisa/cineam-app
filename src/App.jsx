@@ -57,7 +57,7 @@ function App() {
         const movies = result.data.results;
         const screenings = await screening(movies);
         const seats = await getSeats();
-        console.log("the seats: ", seats);
+        console.log("the seats: ", movies);
         dispatch(setSeats(seats));
         dispatch(setMovies(result.data.results));
         dispatch(setScreens(screenings));

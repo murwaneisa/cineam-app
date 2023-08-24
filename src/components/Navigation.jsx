@@ -1,24 +1,35 @@
 import React from "react";
-import { Navbar, Nav, NavItem, NavDropdown, Dropdown } from "react-bootstrap";
+import {
+  Navbar,
+  Nav,
+  NavItem,
+  NavDropdown,
+  Dropdown,
+  Image,
+  Button,
+} from "react-bootstrap";
+import "../style/nav.css";
 
 function Navigation() {
   return (
-    <Navbar bg="dark" variant="dark" expand="md" className="px-4">
-      <Navbar.Brand href="/home">React-Bootstrap</Navbar.Brand>
+    <Navbar variant="dark" expand="md" className="px-4 transparent-navbar">
+      <Navbar.Brand href="/home">
+        <Image src="/images/logo2.png" />
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse
         id="basic-navbar-nav"
         className="justify-content-between"
       >
-        <Nav className="mr-auto">
-          <NavItem>
+        <Nav className="mr-auto nav-text">
+          <NavItem className=" nav-text">
             <Nav.Link href="/home">Home</Nav.Link>
           </NavItem>
           <NavItem>
-            <Nav.Link href="#link">Contact</Nav.Link>
+            <Nav.Link href="#link">Show times</Nav.Link>
           </NavItem>
           <NavItem>
-            <Nav.Link href="#link">About</Nav.Link>
+            <Nav.Link href="#link">About us</Nav.Link>
           </NavItem>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <Dropdown.Item href="#action/3.1">Action</Dropdown.Item>
@@ -30,7 +41,9 @@ function Navigation() {
         </Nav>
         <Nav>
           <NavItem>
-            <Nav.Link href="#login">checkout</Nav.Link>
+            <Button className="btn btn-outline-light px-4 btn-desc bg-dark">
+              Join
+            </Button>
           </NavItem>
         </Nav>
       </Navbar.Collapse>

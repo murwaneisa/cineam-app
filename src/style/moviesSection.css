@@ -1,8 +1,17 @@
-.btn-movie-card {
+.btn-ticket-card {
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  background-color: #4b006e;
+}
+.btn-ticket-card:hover {
+  background-color: #9966cc;
+  border-color: #9966cc;
+}
+
+.btn-details-card {
   border-radius: 1rem;
   font-size: 0.8rem;
 }
-
 .movie-section-title {
   font-family: "Heebo", sans-serif;
   align-items: start;
