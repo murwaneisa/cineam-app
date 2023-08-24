@@ -26,6 +26,12 @@
   justify-content: center;
   background-color: #333;
   border-radius: 50%;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 3rem;
+  width: 3rem;
+}
+
+@media (max-width: 576px) {
+  .sec-container {
+    padding: 0 2rem;
+  }
 }

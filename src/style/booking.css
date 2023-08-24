@@ -5,8 +5,8 @@
 .increment-button {
   background-color: #333;
   border-radius: 50%;
-  height: 3.5rem;
-  width: 3.5rem;
+  height: 3rem;
+  width: 3rem;
 }
 .selected-number {
   display: inline-block;
@@ -126,5 +126,17 @@
   }
   .ticket-sec-info {
     font-size: 70%;
+  }
+}
+
+@media (max-width: 330px) {
+  .increment-button {
+    height: 2.9rem;
+    width: 2.9rem;
+  }
+  .selected-number {
+    font-size: 1rem;
+    line-height: 3.5rem;
+    width: 1.5rem;
   }
 }
