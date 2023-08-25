@@ -41,7 +41,7 @@ function Booking() {
   // Your provided seats array
   const totalAudience =
     ticketQuantities.adult + ticketQuantities.senior + ticketQuantities.child;
-  console.log("the total audience", totalAudience);
+
   const handleSeatClick = (clickedSeatId) => {
     const clickedSeat = auditoriumSeats.find(
       (seat) => seat.id === clickedSeatId
@@ -53,21 +53,36 @@ function Booking() {
     }
 
     // Check if the clicked seat is already selected
-    if (selectedSeats.includes(clickedSeatId)) {
-      setSelectedSeats(selectedSeats.filter((id) => id !== clickedSeatId));
+    if (selectedSeats.some((seat) => seat.id === clickedSeatId)) {
+      setSelectedSeats(
+        selectedSeats.filter((seat) => seat.id !== clickedSeatId)
+      );
     } else {
       const rowNumber = clickedSeat.rowNumber;
+      const seatNumber = clickedSeat.seatNumber;
 
-      const adjacentSeats = auditoriumSeats
-        .filter(
-          (seat) =>
-            seat.rowNumber === rowNumber &&
-            Math.abs(seat.seatNumber - clickedSeat.seatNumber) <=
-              totalAudience - 1
-        )
-        .map((seat) => seat.id);
+      // Calculate the range of seats to select
+      const selectedSeatsArray = [];
+      for (let i = seatNumber; i < seatNumber + totalAudience; i++) {
+        const seatToSelect = auditoriumSeats.find(
+          (seat) => seat.rowNumber === rowNumber && seat.seatNumber === i
+        );
 
-      setSelectedSeats([...selectedSeats, ...adjacentSeats]);
+        if (!seatToSelect || !seatToSelect.isAvailable) {
+          // If any seat in the range is unavailable, break the loop
+          break;
+        }
+
+        selectedSeatsArray.push({
+          id: seatToSelect.id,
+          rowNumber: seatToSelect.rowNumber,
+          seatNumber: seatToSelect.seatNumber,
+        });
+      }
+
+      if (selectedSeatsArray.length === totalAudience) {
+        setSelectedSeats([...selectedSeats, ...selectedSeatsArray]);
+      }
     }
   };
 
@@ -234,7 +249,9 @@ function Booking() {
                           <div
                             key={seat.id}
                             className={`seat ${
-                              selectedSeats.includes(seat.id)
+                              selectedSeats.some(
+                                (selectedSeat) => selectedSeat.id === seat.id
+                              )
                                 ? "selected"
                                 : seat.isAvailable
                                 ? "available"
@@ -274,7 +291,15 @@ function Booking() {
                   </Button>
                 </Stack>
               </Container>
-              <Ticket show={show} handleClose={handleClose} />
+              <Ticket
+                show={show}
+                handleClose={handleClose}
+                seats={selectedSeats}
+                date={auditorium.time}
+                sal={auditorium.auditoriumId}
+                title={movieInfo.title}
+                price={ticketSum}
+              />
             </Stack>
           </Col>
         </Row>

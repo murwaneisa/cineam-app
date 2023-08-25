@@ -2,7 +2,8 @@ import React from "react";
 import { Button, Col, Image, Modal, Row, Stack } from "react-bootstrap";
 import { MdOutlineClose } from "react-icons/md";
 
-function Ticket({ show, handleClose }) {
+function Ticket({ show, handleClose, seats, title, date, sal, price }) {
+  console.log("Ticket seats", seats);
   return (
     <>
       <Modal
@@ -14,19 +15,19 @@ function Ticket({ show, handleClose }) {
         /*    dialogClassName="custom-modal" */
       >
         <Modal.Header closeButton>
-          <Modal.Title>Movie: the chosen one</Modal.Title>
+          <Modal.Title>Movie: {title}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body className="d-flex flex-column align-items-center justify-content-center">
           <Stack className="px-2 mb-4">
             <p className="ticket-sec-title">Date and time</p>
-            <h5 className="ticket-sec-info">Sat Aug 26 2023 19:00</h5>
+            <h5 className="ticket-sec-info">{date}</h5>
           </Stack>
           <Row style={{ width: "100%" }}>
             <Col style={{ width: "33%" }}>
               <div className="d-flex  flex-column">
                 <p className="ticket-sec-title">Sal</p>
-                <p className="ticket-sec-info">1</p>
+                <p className="ticket-sec-info">{sal}</p>
               </div>
               <Stack className="mt-4">
                 <p className="ticket-sec-title">Ticket No</p>
@@ -50,7 +51,7 @@ function Ticket({ show, handleClose }) {
               </Stack>
               <Stack className="mt-4">
                 <p className="ticket-sec-title">Price</p>
-                <p className="ticket-sec-info">147 kr </p>
+                <p className="ticket-sec-info">{price} kr </p>
               </Stack>
             </Col>
           </Row>
