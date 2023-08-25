@@ -13,7 +13,7 @@ function MovieCard(props) {
     (screen) => screen.movieId == id
   );
   const auditoriumId = showTime.auditoriumId;
-  console.log("the time is ", showTime.time);
+
   return (
     <Card
       className="bg-dark p-3 m-2  d-flex flex-column"

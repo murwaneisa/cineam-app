@@ -9,13 +9,22 @@ import { screening } from "./lib/helper";
 import { setScreens, setMovies } from "./redux/slice";
 
 const RenderMovies = () => {
-  const [data, setData] = useState([]);
-  const dataMovies = useSelector((state) => state.data);
-  console.log("the data is the fucking", dataMovies.movies);
+  /*   const [data, setData] = useState([]); */
+  const data = useSelector((state) => state.data);
 
-  if (!dataMovies.movies || dataMovies.movies.length === 0) {
+  if (!data.movies || data.movies.length === 0) {
     return <Loading />;
   }
+  let selectedMovies;
+  if (data.category === 0) {
+    selectedMovies = data.movies;
+  } else {
+    selectedMovies = data.movies.filter(
+      (movie) => movie.genre_ids[0] === data.category
+    );
+  }
+  /*   const genreId = data.category;
+  console.log("the data is the fucking", genreId); */
   return (
     <div>
       <h2 className="movie-section-title">
@@ -24,7 +33,7 @@ const RenderMovies = () => {
       </h2>
 
       <div className="d-flex align-items-center justify-content-center row row-cols-3 g-3">
-        {dataMovies.movies.map((movie) => {
+        {selectedMovies.map((movie) => {
           return <MovieCard movie={movie} />;
         })}
       </div>

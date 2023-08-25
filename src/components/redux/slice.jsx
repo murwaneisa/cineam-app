@@ -5,6 +5,8 @@ const initialState = {
   screens: [],
   movies: [],
   seats: [],
+  category: 0,
+  genres: [],
 };
 
 const screensSlice = createSlice({
@@ -20,8 +22,15 @@ const screensSlice = createSlice({
     setSeats: (state, action) => {
       state.seats = action.payload;
     },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    setGenre: (state, action) => {
+      state.genres = action.payload;
+    },
   },
 });
 
-export const { setScreens, setMovies, setSeats } = screensSlice.actions;
+export const { setScreens, setMovies, setSeats, setCategory, setGenre } =
+  screensSlice.actions;
 export default screensSlice.reducer;

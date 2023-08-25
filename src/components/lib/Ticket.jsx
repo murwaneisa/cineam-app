@@ -37,7 +37,13 @@ function Ticket({ show, handleClose, seats, title, date, sal, price }) {
             <Col style={{ width: "33%" }}>
               <Stack>
                 <p className="ticket-sec-title">Row</p>
-                <p className="ticket-sec-info">7</p>
+                <p className="ticket-sec-info">
+                  {Array.from(new Set(seats.map((seat) => seat.rowNumber))).map(
+                    (rowNumber) => (
+                      <span key={rowNumber}>{rowNumber} </span>
+                    )
+                  )}
+                </p>
               </Stack>
               <Stack className="mt-4">
                 <p className="ticket-sec-title">Movie Screen</p>
@@ -47,7 +53,11 @@ function Ticket({ show, handleClose, seats, title, date, sal, price }) {
             <Col style={{ width: "33%" }}>
               <Stack>
                 <p className="ticket-sec-title">Seat</p>
-                <p className="ticket-sec-info">2,5,8,</p>
+                <p className="ticket-sec-info">
+                  {seats.map((seat) => {
+                    return <span>{seat.seatNumber} </span>;
+                  })}
+                </p>
               </Stack>
               <Stack className="mt-4">
                 <p className="ticket-sec-title">Price</p>

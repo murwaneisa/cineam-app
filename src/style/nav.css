@@ -2,7 +2,8 @@
   background-color: rgba(0, 0, 0, 1);
 }
 
-.nav-text {
+.nav-link {
   font-family: "Heebo", sans-serif;
   font-weight: bold;
+  color: white;
 }

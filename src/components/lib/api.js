@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_REACT_APP_API_KEY; // vite use the VITE_REACT_APP to access variables in the .env file
-console.log("the key is ", API_KEY);
+
 //image url:https://image.tmdb.org/t/p/w400/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg
 
 export async function fetchData() {
@@ -55,3 +55,14 @@ export async function getSeats() {
     console.error(error);
   }
 }
+const baseUrl = "https://api.themoviedb.org/3";
+// Fetch the list of genres
+export async function fetchGenres() {
+  const response = await axios.get(
+    `${baseUrl}/genre/movie/list?api_key=${API_KEY}`
+  );
+  const data = response.data.genres;
+  return data;
+}
+
+fetchGenres();

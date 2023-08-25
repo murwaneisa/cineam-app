@@ -17,13 +17,14 @@ import { useSelector } from "react-redux";
 import Loading from "../components/lib/loading";
 import { seats } from "../components/lib/seats";
 import Ticket from "../components/lib/Ticket";
+import { toast } from "react-toastify";
 
 function Booking() {
   const { id, auditoriumId } = useParams();
   const data = useSelector((state) => state.data);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
   const movieInfo = data.movies.find((movie) => movie.id == id);
   const auditorium = data.screens.find((audi) => audi.movieId == id);
   const auditoriumSeats = seats.filter(
@@ -48,7 +49,6 @@ function Booking() {
     );
 
     if (!clickedSeat.isAvailable) {
-      // If the seat is not available, do nothing
       return;
     }
 
@@ -69,6 +69,12 @@ function Booking() {
         );
 
         if (!seatToSelect || !seatToSelect.isAvailable) {
+          toast.info(
+            `The selected audiences is ${totalAudience} and the next seat is unavailable! `,
+            {
+              position: toast.POSITION.TOP_CENTER,
+            }
+          );
           // If any seat in the range is unavailable, break the loop
           break;
         }
@@ -116,6 +122,24 @@ function Booking() {
     ticketQuantities.senior * 75 +
     ticketQuantities.child * 65;
   console.log("the selected seats ", selectedSeats);
+
+  const handleShow = () => {
+    if (selectedSeats.length !== 0 && totalAudience === selectedSeats.length) {
+      setShow(true);
+    }
+
+    if (selectedSeats.length === 0) {
+      return toast.info("You have to select a seat!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    if (totalAudience !== selectedSeats.length) {
+      return toast.info("You selected more seats then the audience number!", {
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+  };
+
   return (
     <Section>
       <Container className="pt-5">
@@ -257,7 +281,16 @@ function Booking() {
                                 ? "available"
                                 : "unavailable"
                             }`}
-                            onClick={() => handleSeatClick(seat.id)}
+                            onClick={() =>
+                              totalAudience === 0
+                                ? toast.info(
+                                    "You have to select the audience first!",
+                                    {
+                                      position: toast.POSITION.TOP_CENTER,
+                                    }
+                                  )
+                                : handleSeatClick(seat.id)
+                            }
                           ></div>
                         ))}
                       </div>
