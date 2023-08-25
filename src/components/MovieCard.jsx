@@ -2,12 +2,18 @@ import React from "react";
 import "../style/moviesSection.css";
 import { Button, Container, Stack, Badge, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function MovieCard(props) {
   const { original_title, poster_path, release_date, id, genre_ids } =
     props.movie;
   const genre = genre_ids[0];
-
+  const foundMovieDate = useSelector((state) => state.data);
+  const showTime = foundMovieDate.screens.find(
+    (screen) => screen.movieId == id
+  );
+  const auditoriumId = showTime.auditoriumId;
+  console.log("the time is ", showTime.time);
   return (
     <Card
       className="bg-dark p-3 m-2  d-flex flex-column"
@@ -34,16 +40,17 @@ function MovieCard(props) {
           </Card.Title>
         </div>
         <Card.Text className="lead" style={{ fontSize: "1rem" }}>
-          {release_date}
+          {showTime.time}
         </Card.Text>
         <Stack gap={3} direction="horizontal">
-          <Button
-            href="#"
-            className="btn-ticket-card btn p-2 btn-sm"
-            style={{ borderColor: "#4b006e" }}
-          >
-            Tickets
-          </Button>
+          <Link to={`/booking/${auditoriumId}/${id}`}>
+            <Button
+              className="btn-ticket-card btn p-2 btn-sm"
+              style={{ borderColor: "#4b006e" }}
+            >
+              Tickets
+            </Button>
+          </Link>
           <Link to={`/movies/${genre}/${id}`}>
             <Button className="btn btn-outline-light btn-details-card bg-dark">
               Details

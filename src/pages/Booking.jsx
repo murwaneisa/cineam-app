@@ -103,7 +103,7 @@ function Booking() {
   console.log("the selected seats ", selectedSeats);
   return (
     <Section>
-      <Container>
+      <Container className="pt-5">
         <Row>
           {/* the ticket type section */}
           <Col lg={5} md={6} xs={12}>

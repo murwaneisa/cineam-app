@@ -104,7 +104,7 @@ function MovieDetails() {
             md={5}
             xs={12}
             className="order-md-1 order-xs-2 p-2  justify-content-center align-item-center"
-            /*   style={{ border: "solid 2px red" }} */
+            style={{ marginRight: "30px" }}
           >
             {/* Image */}
 
@@ -120,9 +120,7 @@ function MovieDetails() {
             />
             <div className="mt-3 d-flex flex-row flex-md-col align-items-center">
               <Link to={`/booking/${auditoriumId}/${id}`}>
-                <Button className="btn-details" variant="primary">
-                  Get Ticket
-                </Button>
+                <Button className="btn-get-ticket">Get Ticket</Button>
               </Link>
               <Button
                 className="btn-details"
@@ -167,7 +165,7 @@ function MovieDetails() {
             <div className="text_container">
               <p>{overview}</p>
             </div>
-            <h4 className="actors_section_title">Actors : </h4>
+            <h4 className="actors_section_title">Cost: </h4>
             <div className="d-flex justify-content-between flex-wrap mt-1 mt-md-5">
               {main_actors.map((actor) => (
                 <div key={actor.id} className="actor-item text-center mb-3">

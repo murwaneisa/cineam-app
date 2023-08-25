@@ -46,12 +46,18 @@
   height: 4rem;
 }
 
-.btn-details {
+.btn-get-ticket {
   border-radius: 2rem;
   padding-right: 0.5rem;
   padding-left: 0.5rem;
+  background-color: #4b006e;
+  border-color: #4b006e;
 }
 
+.btn-get-ticket:hover {
+  background-color: #9966cc;
+  border-color: #9966cc;
+}
 .btn-trailer {
   color: #ffffff;
   padding-left: 0.5rem;

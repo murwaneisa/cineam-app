@@ -59,7 +59,7 @@ function Ticket({ show, handleClose }) {
           <div>
             <Image src={"/images/barcode.png"} style={{ width: "100%" }} />
 
-            <Button style={{ width: "100%" }} variant="primary">
+            <Button style={{ width: "100%" }} className="btn-download">
               Download your ticket
             </Button>
           </div>
