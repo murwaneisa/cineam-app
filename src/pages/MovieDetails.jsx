@@ -73,9 +73,8 @@ function MovieDetails() {
     original_language,
   } = details;
   const genre = genres[0].name;
-  console.log("the movies ", movies);
+
   const main_actors = crewAndTrailer.crew_actors.slice(0, 4);
-  console.log("the trailer ", crewAndTrailer);
 
   let trailer_key;
   if (crewAndTrailer.trailer) {
@@ -91,7 +90,7 @@ function MovieDetails() {
   );
 
   const auditoriumId = showTime.auditoriumId;
-  console.log("the related movies is ", showTime.auditoriumId);
+
   return (
     <Section>
       <Container

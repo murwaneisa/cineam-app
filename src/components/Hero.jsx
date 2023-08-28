@@ -4,6 +4,7 @@ import "../style/hero.css";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loading from "./lib/loading";
+import { LuCalendarDays } from "react-icons/lu";
 
 function HeroSection() {
   const movieData = useSelector((state) => state.data);
@@ -14,7 +15,7 @@ function HeroSection() {
   ) {
     return <Loading />;
   }
-  console.log("the movies", movieData);
+
   const {
     backdrop_path,
     original_title,
@@ -42,7 +43,11 @@ function HeroSection() {
         <div className="row h-100 align-items-end ">
           <div className="col-12 mb-4">
             <h1 className="fw-light">{original_title}</h1>
-            <span className="date">{release_date}</span>
+
+            <span className="date ">
+              <LuCalendarDays />
+              {release_date}
+            </span>
             <p className="lead w-50 ">{overview}</p>
             <p>
               Director: <span className="director">Ryan Coogler</span>

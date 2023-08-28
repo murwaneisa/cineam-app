@@ -34,7 +34,7 @@ const RenderMovies = () => {
 
       <div className="d-flex align-items-center justify-content-center row row-cols-3 g-3">
         {selectedMovies.map((movie) => {
-          return <MovieCard movie={movie} />;
+          return <MovieCard key={movie.id} movie={movie} />;
         })}
       </div>
     </div>
